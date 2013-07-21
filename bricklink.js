@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Bricklink Tweaks
 // @namespace      https://github.com/ksuquix/userscript-tweaks
-// @version        0.0.6
+// @version        0.0.7
 // @description    Add tweaks / features to bricklink
 // @include        http://www.bricklink.com/*
 // @require        http://code.jquery.com/jquery-1.10.2.min.js
@@ -39,5 +39,6 @@ if(window.location.pathname.indexOf('inventory_add.asp')) {
 	}
     });
     $('input[name=invSale]').val(10);
+    $('input:radio[name=invNew]').focus();
     $('input[name=p_quantity]').focus();
 }
