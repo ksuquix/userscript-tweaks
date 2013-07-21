@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Bricklink Tweaks
 // @namespace      https://github.com/ksuquix/userscript-tweaks
-// @version        0.0.5
+// @version        0.0.6
 // @description    Add tweaks / features to bricklink
 // @include        http://www.bricklink.com/*
 // @require        http://code.jquery.com/jquery-1.10.2.min.js
@@ -25,6 +25,7 @@ if(window.location.pathname.indexOf('catalogItem.asp')) {
 // If inventory page, automatically trigger the price guide ajax pull
 // also set a click rule on condition (new/used) to set it to the average value (new or used)
 // also sets percentage to 10
+// then focus to quantity
 if(window.location.pathname.indexOf('inventory_add.asp')) { 
     ajaxGet('priceGuideSummary.asp?a=p&vcID=1&vatInc=N&ajView=Y&colorID='+document.getElementById('p_color').value+'&itemID='+window.document.cascade.elements['p_selecteditemID'].value,getPg,'Y',errPg);
     $('input:radio[name=invNew]').click(function() {
@@ -38,4 +39,5 @@ if(window.location.pathname.indexOf('inventory_add.asp')) {
 	}
     });
     $('input[name=invSale]').val(10);
+    $('input[name=p_quantity]').focus();
 }
