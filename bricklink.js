@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Bricklink Tweaks
 // @namespace      https://github.com/ksuquix/userscript-tweaks
-// @version        0.0.7
+// @version        0.0.8
 // @description    Add tweaks / features to bricklink
 // @include        http://www.bricklink.com/*
 // @require        http://code.jquery.com/jquery-1.10.2.min.js
@@ -14,7 +14,7 @@ $('title').after('<script type="text/javascript" language="javascript" src="http
 // On Part catalog entry, add an "(Add)" link next to price guide that goes into inventory add dialog with
 //    part and color set
 if(window.location.pathname.indexOf('catalogItem.asp')) { 
-    $('a[href*=catalogPG]').each(function() {
+    $('a[href*=catalogPG\\?]').each(function() {
 	url = $(this).attr('href').
 	    replace(/catalogPG.asp\?P=/,'inventory_add.asp?a=p&itemID=').
 	    replace(/colorID=/,'p_color=');
