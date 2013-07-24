@@ -4,11 +4,14 @@ userscript-tweaks
 userscript for various things
 
 
-In Tampermonkey, I recommend the following:
+In Tampermonkey, here are some things you can do:
 
-1) Set "Allow access to file URLs" in chrome::/extensions
-2) Tampermonkey->Settings->Config mode: Advanced
-3) Tampermonkey->Settings->TESLA->chrome sync->save
-   a) settings->(bottom)->restart tampermonkey
-   b) click on the notification to enable sync
+* Allow drag and drop
+ + Set "Allow access to file URLs" in chrome::/extensions
+* More config options (required for chrome sync, etc)
+ + Tampermonkey->Settings->Config mode: Advanced
+* Chrome sync
+ + Tampermonkey->Settings->TESLA->chrome sync->save
+ + settings->(bottom)->restart tampermonkey
+ + click on the notification to enable sync
    
