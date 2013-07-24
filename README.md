@@ -15,3 +15,4 @@ In Tampermonkey, here are some things you can do:
  + settings->(bottom)->restart tampermonkey
  + click on the notification to enable sync
    
+<a href="https://raw.github.com/ksuquix/userscript-tweaks/master/bricklink.tamper.js">Install</a>
