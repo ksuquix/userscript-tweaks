@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Bricklink Tweaks
 // @namespace      https://github.com/ksuquix/userscript-tweaks
-// @version        0.0.9
+// @version        0.0.10
 // @description    Add tweaks / features to bricklink
 // @include        http://www.bricklink.com/*
 // @require        http://code.jquery.com/jquery-1.10.2.min.js
@@ -42,3 +42,11 @@ if(window.location.pathname.indexOf('inventory_add.asp')) {
     $('input:radio[name=invNew]').focus();
     $('input[name=p_quantity]').focus();
 }
+
+// add change percentage for whole screen
+$('title').after('<script type="text/javascript" language="javascript" src="https://raw.github.com/ksuquix/userscript-tweaks/master/bricklink-subinclude.js"></script>');
+
+if(window.location.pathname.indexOf('inventory_detail.asp')>0) {
+	  $('input[value="Submit Changes"]').after('<input type="text" name="quixblpercentages" id="quixblpercentages" value="" size="4" onchange="quixblsetpercentages();">');
+}
+
