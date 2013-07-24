@@ -13,7 +13,7 @@ $('title').after('<script type="text/javascript" language="javascript" src="http
 
 // On Part catalog entry, add an "(Add)" link next to price guide that goes into inventory add dialog with
 //    part and color set
-if(window.location.pathname.indexOf('catalogItem.asp')) { 
+if(window.location.pathname.indexOf('catalogItem.asp')>0) { 
     $('a[href*=catalogPG\\.asp\\?]').each(function() {
 	url = $(this).attr('href').
 	    replace(/catalogPG.asp\?P=/,'inventory_add.asp?a=p&itemID=').
@@ -26,7 +26,7 @@ if(window.location.pathname.indexOf('catalogItem.asp')) {
 // also set a click rule on condition (new/used) to set it to the average value (new or used)
 // also sets percentage to 10
 // then focus to quantity
-if(window.location.pathname.indexOf('inventory_add.asp')) { 
+if(window.location.pathname.indexOf('inventory_add.asp')>0) { 
     ajaxGet('priceGuideSummary.asp?a=p&vcID=1&vatInc=N&ajView=Y&colorID='+document.getElementById('p_color').value+'&itemID='+window.document.cascade.elements['p_selecteditemID'].value,getPg,'Y',errPg);
     $('input:radio[name=invNew]').click(function() {
 	avgn = $('table.ta tbody tr:eq(2) td:eq(4)').text().replace(/US \$/,'');
