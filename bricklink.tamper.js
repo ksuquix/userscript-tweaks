@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Bricklink Tweaks
 // @namespace      https://github.com/ksuquix/userscript-tweaks
-// @version        0.0.11
+// @version        0.0.12
 // @description    Add tweaks / features to bricklink
 // @include        http://www.bricklink.com/*
 // @require        http://code.jquery.com/jquery-1.10.2.min.js
@@ -27,7 +27,7 @@ if(window.location.pathname.indexOf('catalogItem.asp')>0) {
 // also sets percentage to 10
 // then focus to quantity
 if(window.location.pathname.indexOf('inventory_add.asp')>0) { 
-    ajaxGet('priceGuideSummary.asp?a=p&vcID=1&vatInc=N&ajView=Y&colorID='+document.getElementById('p_color').value+'&itemID='+window.document.cascade.elements['p_selecteditemID'].value,getPg,'Y',errPg);
+    // function to set values
     $('input:radio[name=invNew]').click(function() {
 	avgn = $('table.ta tbody tr:eq(2) td:eq(4)').text().replace(/US \$/,'');
 	avgu = $('table.ta tbody tr:eq(3) td:eq(4)').text().replace(/US \$/,'');
@@ -39,8 +39,13 @@ if(window.location.pathname.indexOf('inventory_add.asp')>0) {
 	}
     });
     $('input[name=invSale]').val(10);
-    $('input:radio[name=invNew]').focus();
-    $('input[name=p_quantity]').focus();
+    $('input:radio[name=invNew]').focus(); // focus down the screen first, so we can focus up and get interesting stuff in the screen
+    if($('select#p_color').val()) {   // only query ajax if color set
+	ajaxGet('priceGuideSummary.asp?a=p&vcID=1&vatInc=N&ajView=Y&colorID='+document.getElementById('p_color').value+'&itemID='+window.document.cascade.elements['p_selecteditemID'].value,getPg,'Y',errPg);
+	$('input[name=p_quantity]').focus();
+    } else {
+	$('select#p_color').focus();
+    }
 }
 
 // add change percentage for whole screen
@@ -51,7 +56,7 @@ if(window.location.pathname.indexOf('inventory_detail.asp')>0) {
     $('input[value="Submit Changes"]').after('<input type="text" name="quixblpercentages" id="quixblpercentages" value="" size="4" onchange="quixblsetpercentages();">');
     
     // add clicky to add another of this type dialog
-    $('a[href="catalogItem.asp\?P="]').each(function(){
+    $('a[href*="catalogItem.asp\?P="]').each(function(){
 	part = $(this).attr('href').match(/P=(\d+)/);
 	if(part) {
 	    $(this).after('&nbsp;<a href="/inventory_add.asp?a=p&itemID='+part[1]+'">(Add)</a>');
