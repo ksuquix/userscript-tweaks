@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Bricklink Tweaks
 // @namespace      https://github.com/ksuquix/userscript-tweaks
-// @version        0.0.10
+// @version        0.0.11
 // @description    Add tweaks / features to bricklink
 // @include        http://www.bricklink.com/*
 // @require        http://code.jquery.com/jquery-1.10.2.min.js
@@ -47,6 +47,15 @@ if(window.location.pathname.indexOf('inventory_add.asp')>0) {
 $('title').after('<script type="text/javascript" language="javascript" src="https://raw.github.com/ksuquix/userscript-tweaks/master/bricklink-subinclude.js"></script>');
 
 if(window.location.pathname.indexOf('inventory_detail.asp')>0) {
-	  $('input[value="Submit Changes"]').after('<input type="text" name="quixblpercentages" id="quixblpercentages" value="" size="4" onchange="quixblsetpercentages();">');
+    // trigger percentage change
+    $('input[value="Submit Changes"]').after('<input type="text" name="quixblpercentages" id="quixblpercentages" value="" size="4" onchange="quixblsetpercentages();">');
+    
+    // add clicky to add another of this type dialog
+    $('a[href="catalogItem.asp\?P="]').each(function(){
+	part = $(this).attr('href').match(/P=(\d+)/);
+	if(part) {
+	    $(this).after('&nbsp;<a href="/inventory_add.asp?a=p&itemID='+part[1]+'">(Add)</a>');
+	}
+    });
 }
 
