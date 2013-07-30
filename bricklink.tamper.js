@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Bricklink Tweaks
 // @namespace      https://github.com/ksuquix/userscript-tweaks
-// @version        0.0.16
+// @version        0.0.17
 // @description    Add tweaks / features to bricklink
 // @include        http://www.bricklink.com/*
 // @require        http://code.jquery.com/jquery-1.10.2.min.js
@@ -35,7 +35,7 @@ if(window.location.pathname.indexOf('inventory_add.asp')>0) {
     $('input:radio[name=invNew]').focus(); // focus down the screen first, so we can focus up and get interesting stuff in the screen
     if($('select#p_color').val()>0) {   // only query ajax if color set
 	ajaxGet('priceGuideSummary.asp?a=p&vcID=1&vatInc=N&ajView=Y&colorID='+document.getElementById('p_color').value+'&itemID='+window.document.cascade.elements['p_selecteditemID'].value,getPg,'Y',errPg);
-	unsafeWindow.quixblpriceguideavgset();
+	setTimeout('quixblpriceguideavgset()',1000);
 	$('input[name=p_quantity]').focus();
     } else {
 //	window.setTimeout(function() {
@@ -47,8 +47,8 @@ if(window.location.pathname.indexOf('inventory_add.asp')>0) {
     // reload ajax when color changes
     $('select#p_color').change(function() {
 	ajaxGet('priceGuideSummary.asp?a=p&vcID=1&vatInc=N&ajView=Y&colorID='+document.getElementById('p_color').value+'&itemID='+window.document.cascade.elements['p_selecteditemID'].value,getPg,'Y',errPg);
-	unsafeWindow.quixblpriceguideavgset();
-});
+	setTimeout('quixblpriceguideavgset()',1000);
+    });
 }
 
 if(window.location.pathname.indexOf('inventory_detail.asp')>0) {
