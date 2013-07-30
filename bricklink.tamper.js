@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Bricklink Tweaks
 // @namespace      https://github.com/ksuquix/userscript-tweaks
-// @version        0.0.17
+// @version        0.0.18
 // @description    Add tweaks / features to bricklink
 // @include        http://www.bricklink.com/*
 // @require        http://code.jquery.com/jquery-1.10.2.min.js
@@ -49,6 +49,39 @@ if(window.location.pathname.indexOf('inventory_add.asp')>0) {
 	ajaxGet('priceGuideSummary.asp?a=p&vcID=1&vatInc=N&ajView=Y&colorID='+document.getElementById('p_color').value+'&itemID='+window.document.cascade.elements['p_selecteditemID'].value,getPg,'Y',errPg);
 	setTimeout('quixblpriceguideavgset()',1000);
     });
+
+    // hide crap
+$(document).ready(function() {
+$('p:contains(If you select a Part)').hide();
+$('p:contains(The remarks field is only vis)').hide();
+$('p:contains(You can switch back to the radio button)').hide();
+
+$('font:contains(Select this option if you want)').hide();
+$('font:contains(If you select to reserve)').hide();
+$('font:contains(optional):not(:contains(Remarks))').hide();
+$('table[cellpadding=0]:contains(Reserved For):not(:contains(Retain))').hide();
+$('tr:contains(Stockroom):not(:contains(Retain))').hide();
+$('table[cellpadding=0]:contains(Bind to Super):not(:contains(Category))').hide();
+
+$('font:contains(Edit My Default)').hide();
+$('p:contains(Please make sure)').hide();
+
+$('font:contains(Part:)').hide();
+$('p:contains(Custom Item)').hide();
+$('table:contains(Step 1):not(:contains(Color:))').hide();
+$('table:contains(Sell Parts):not(:contains(Color:))').hide();
+$('table:contains(Category:):not(:contains(Part Number))').hide();
+$('td:contains(View Image):not(:contains(Part Number))').hide();
+
+$('tr:contains(Tiered):not(:contains(Price))').hide();
+$('tr:contains(Bulk):not(:contains(Quantity))').hide();
+
+$('td').filter(function() { return $(this).html() === '&nbsp;'; }).hide();
+$('input[value="Reset Form"]').after(
+'<a style="border: solid black 1px;" onclick="$(\'p\').show();$(\'font\').show();$(\'table\').show();$(\'tr\').show();$(\'td\').show();"> Show all stuff </a>');
+
+});
+
 }
 
 if(window.location.pathname.indexOf('inventory_detail.asp')>0) {
