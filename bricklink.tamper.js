@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Bricklink Tweaks
 // @namespace      https://github.com/ksuquix/userscript-tweaks
-// @version        0.0.21
+// @version        0.0.22
 // @description    Add tweaks / features to bricklink
 // @include        http://www.bricklink.com/*
 // @require        http://code.jquery.com/jquery-1.10.2.min.js
@@ -68,7 +68,12 @@ $('td:contains(View Image):not(:contains(Number:))').hide();
 $('tr:contains(Tiered):not(:contains(Price))').hide();
 $('tr:contains(Bulk):not(:contains(Quantity))').hide();
 
+$('font:contains(Read our ):not(:contains(Extended))').hide();
+
 $('td').filter(function() { return $(this).html() === '&nbsp;'; }).hide();
+
+$('textarea').attr('rows',1);
+
 $('input[value="Reset Form"]').after(
 '<a style="border: solid black 1px;" onclick="$(\'p\').show();$(\'font\').show();$(\'table\').show();$(\'tr\').show();$(\'td\').show();"> Show all stuff </a>');
 
@@ -88,7 +93,9 @@ $('input[value="Reset Form"]').after(
 if(window.location.pathname.indexOf('inventory_detail.asp')>0) {
     // trigger percentage change
     $('input[value="Submit Changes"]').after('<input type="text" name="quixblpercentages" id="quixblpercentages" value="" size="4" onchange="quixblsetpercentages();">');
+}
     
+if(window.location.pathname.indexOf('inventory_detail.asp')>0 || window.location.pathname.indexOf('catalogItemInv.asp')>0) {
     // add clicky to add another of this type dialog
     $('a[href*="catalogItem.asp\?P="]').each(function(){
 	part = $(this).attr('href').match(/P=(\d+)/);
