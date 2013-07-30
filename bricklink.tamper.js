@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Bricklink Tweaks
 // @namespace      https://github.com/ksuquix/userscript-tweaks
-// @version        0.0.28
+// @version        0.0.29
 // @description    Add tweaks / features to bricklink
 // @include        http://www.bricklink.com/*
 // @require        http://code.jquery.com/jquery-1.10.2.min.js
@@ -53,7 +53,6 @@ if(window.location.pathname.indexOf('inventory_add.asp')>0) {
     if($('select#p_color').val()>0 || $('#p_color').attr('type')=='Hidden') {   // only query ajax if color set or if color hidden instead of selector (sets, minifigs)
 	ajaxGet('priceGuideSummary.asp?a='+$('*[name=itemType]').val()+'&vcID=1&vatInc=N&ajView=Y&colorID='+document.getElementById('p_color').value+'&itemID='+window.document.cascade.elements['p_selecteditemID'].value,getPg,'Y',errPg);
 	setTimeout('quixblpriceguideavgset()',1200);
-	$('input[name=p_quantity]').focus();
     } 
     // reload ajax when color changes
     $('select#p_color').change(function() {
@@ -104,6 +103,8 @@ $('input[value="Reset Form"]').after(
 	    $('select#p_color').focus();
 	    $('select#p_color').select();
 	}, 800);
+    } else {
+	$('input[name=p_quantity]').focus();
     }
 });
 
