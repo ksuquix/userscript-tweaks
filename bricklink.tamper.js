@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Bricklink Tweaks
 // @namespace      https://github.com/ksuquix/userscript-tweaks
-// @version        0.0.22
+// @version        0.0.23
 // @description    Add tweaks / features to bricklink
 // @include        http://www.bricklink.com/*
 // @require        http://code.jquery.com/jquery-1.10.2.min.js
@@ -15,7 +15,7 @@ $('title').after('<script type="text/javascript" language="javascript" src="http
 
 // On Part catalog entry, add an "(Add)" link next to price guide that goes into inventory add dialog with
 //    part and color set
-if(window.location.pathname.indexOf('catalogItem.asp')>0) { 
+if(window.location.pathname.indexOf('catalogItem.asp')>0 || window.location.pathname.indexOf('catalogItemInv.asp')>0) { 
     $('a[href*=catalogPG\\.asp\\?]').each(function() {
 	url = $(this).attr('href').
 	    replace(/catalogPG.asp\?P=/,'inventory_add.asp?a=p&itemID=').
@@ -93,9 +93,6 @@ $('input[value="Reset Form"]').after(
 if(window.location.pathname.indexOf('inventory_detail.asp')>0) {
     // trigger percentage change
     $('input[value="Submit Changes"]').after('<input type="text" name="quixblpercentages" id="quixblpercentages" value="" size="4" onchange="quixblsetpercentages();">');
-}
-    
-if(window.location.pathname.indexOf('inventory_detail.asp')>0 || window.location.pathname.indexOf('catalogItemInv.asp')>0) {
     // add clicky to add another of this type dialog
     $('a[href*="catalogItem.asp\?P="]').each(function(){
 	part = $(this).attr('href').match(/P=(\d+)/);
