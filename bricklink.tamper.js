@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Bricklink Tweaks
 // @namespace      https://github.com/ksuquix/userscript-tweaks
-// @version        0.0.23
+// @version        0.0.24
 // @description    Add tweaks / features to bricklink
 // @include        http://www.bricklink.com/*
 // @require        http://code.jquery.com/jquery-1.10.2.min.js
@@ -15,13 +15,20 @@ $('title').after('<script type="text/javascript" language="javascript" src="http
 
 // On Part catalog entry, add an "(Add)" link next to price guide that goes into inventory add dialog with
 //    part and color set
-if(window.location.pathname.indexOf('catalogItem.asp')>0 || window.location.pathname.indexOf('catalogItemInv.asp')>0) { 
+if(window.location.pathname.indexOf('catalogItem.asp')>0 || window.location.pathname.indexOf('catalogItemInv.asp')>0 || window.location.pathname.indexOf('catalogList.asp')>0) { 
     $('a[href*=catalogPG\\.asp\\?]').each(function() {
 	url = $(this).attr('href').
 	    replace(/catalogPG.asp\?P=/,'inventory_add.asp?a=p&itemID=').
+	    replace(/catalogPG.asp\?M=/,'inventory_add.asp?a=m&itemID=').
 	    replace(/colorID=/,'p_color=');
 	$(this).after('&nbsp;<a href="'+url+'">(Add)</a>');
     });
+    $('a[href*=catalogItemInv\\.asp\\?S]').each(function() {
+	url = $(this).attr('href').
+	    replace(/catalogItemInv.asp\?S=/,'inventory_add.asp?a=s&itemID=').
+	    replace(/colorID=/,'p_color=');
+	$(this).after('&nbsp;-&nbsp;<a href="'+url+'">Add</a>');
+    });	
 }
 
 // If inventory page, automatically trigger the price guide ajax pull
