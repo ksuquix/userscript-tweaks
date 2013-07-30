@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Bricklink Tweaks
 // @namespace      https://github.com/ksuquix/userscript-tweaks
-// @version        0.0.25
+// @version        0.0.26
 // @description    Add tweaks / features to bricklink
 // @include        http://www.bricklink.com/*
 // @require        http://code.jquery.com/jquery-1.10.2.min.js
@@ -50,7 +50,7 @@ if(window.location.pathname.indexOf('catalogItem.asp')>0 || window.location.path
 if(window.location.pathname.indexOf('inventory_add.asp')>0) { 
     // function to set values
     $('input:radio[name=invNew]').click(function() { quixblpriceguideavgset(); });
-    if($('select#p_color').val()>0) {   // only query ajax if color set
+    if($('select#p_color').val()>0 || $('#p_color').attr('type')=='Hidden') {   // only query ajax if color set or if color hidden instead of selector (sets, minifigs)
 	ajaxGet('priceGuideSummary.asp?a=p&vcID=1&vatInc=N&ajView=Y&colorID='+document.getElementById('p_color').value+'&itemID='+window.document.cascade.elements['p_selecteditemID'].value,getPg,'Y',errPg);
 	setTimeout('quixblpriceguideavgset()',1200);
 	$('input[name=p_quantity]').focus();
