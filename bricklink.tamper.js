@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Bricklink Tweaks
 // @namespace      https://github.com/ksuquix/userscript-tweaks
-// @version        0.0.12
+// @version        0.0.13
 // @description    Add tweaks / features to bricklink
 // @include        http://www.bricklink.com/*
 // @require        http://code.jquery.com/jquery-1.10.2.min.js
@@ -28,24 +28,21 @@ if(window.location.pathname.indexOf('catalogItem.asp')>0) {
 // then focus to quantity
 if(window.location.pathname.indexOf('inventory_add.asp')>0) { 
     // function to set values
-    $('input:radio[name=invNew]').click(function() {
-	avgn = $('table.ta tbody tr:eq(2) td:eq(4)').text().replace(/US \$/,'');
-	avgu = $('table.ta tbody tr:eq(3) td:eq(4)').text().replace(/US \$/,'');
-	if($('input:radio[name=invNew]:checked').val()=='N') {
-	    $('input[name=p_price]').val(avgn);
-	}
-	if($('input:radio[name=invNew]:checked').val()=='U') {
-	    $('input[name=p_price]').val(avgu);
-	}
-    });
+    $('input:radio[name=invNew]').click(function() { quixblpriceguideavgset(); });
     $('input[name=invSale]').val(10);
     $('input:radio[name=invNew]').focus(); // focus down the screen first, so we can focus up and get interesting stuff in the screen
-    if($('select#p_color').val()) {   // only query ajax if color set
+    if($('select#p_color').val()>0) {   // only query ajax if color set
 	ajaxGet('priceGuideSummary.asp?a=p&vcID=1&vatInc=N&ajView=Y&colorID='+document.getElementById('p_color').value+'&itemID='+window.document.cascade.elements['p_selecteditemID'].value,getPg,'Y',errPg);
 	$('input[name=p_quantity]').focus();
     } else {
-	$('select#p_color').focus();
+//	window.setTimeout(function() {
+//  this gets toasted and rewritten, grr
+	    $('select#p_color').focus();
+	    $('select#p_color').select();
+//	}, 300);
     }
+    // reload ajax when color changes
+    $('select#p_color').change(function() {ajaxGet('priceGuideSummary.asp?a=p&vcID=1&vatInc=N&ajView=Y&colorID='+document.getElementById('p_color').value+'&itemID='+window.document.cascade.elements['p_selecteditemID'].value,getPg,'Y',errPg);});
 }
 
 // add change percentage for whole screen
