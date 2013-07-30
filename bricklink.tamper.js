@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Bricklink Tweaks
 // @namespace      https://github.com/ksuquix/userscript-tweaks
-// @version        0.0.19
+// @version        0.0.20
 // @description    Add tweaks / features to bricklink
 // @include        http://www.bricklink.com/*
 // @require        http://code.jquery.com/jquery-1.10.2.min.js
@@ -62,8 +62,8 @@ $('font:contains(Part:)').hide();
 $('p:contains(Custom Item)').hide();
 $('table:contains(Step 1):not(:contains(Color:))').hide();
 $('table:contains(Sell Parts):not(:contains(Color:))').hide();
-$('table:contains(Category:):not(:contains(Part Number))').hide();
-$('td:contains(View Image):not(:contains(Part Number))').hide();
+$('table:contains(Category:):not(:contains(Number:))').hide();
+$('td:contains(View Image):not(:contains(Number:))').hide();
 
 $('tr:contains(Tiered):not(:contains(Price))').hide();
 $('tr:contains(Bulk):not(:contains(Quantity))').hide();
