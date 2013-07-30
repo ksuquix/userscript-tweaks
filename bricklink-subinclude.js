@@ -11,9 +11,11 @@ function quixblsetpercentages() {
 function quixblpriceguideavgset() {
     avgn = '';
     avgu = '';
-    if($('table.ta tbody tr:eq(2) td:eq(0)').text()=='New:&nbsp;') {
+    if($('table.ta tbody tr:eq(2) td:eq(0)').text().match(/new:/i)) {
 	avgn = $('table.ta tbody tr:eq(2) td:eq(4)').text().replace(/US \$/,'');
 	avgu = $('table.ta tbody tr:eq(3) td:eq(4)').text().replace(/US \$/,'');
+    } else if($('table.ta tbody tr:eq(2) td:eq(0)').text().match(/used:/i)) {
+	avgu = $('table.ta tbody tr:eq(2) td:eq(4)').text().replace(/US \$/,'');
     }
     if($('input:radio[name=invNew]:checked').val()=='N') {
 	$('input[name=p_price]').val(avgn);
