@@ -58,10 +58,10 @@ $('table[cellpadding=0]:contains(Bind to Super):not(:contains(Category))').hide(
 $('font:contains(Edit My Default)').hide();
 $('p:contains(Please make sure)').hide();
 
-$('font:contains(Part:)').hide();
+$('font:contains(Select a category)').hide();
 $('p:contains(Custom Item)').hide();
-$('table:contains(Step 1):not(:contains(Color:))').hide();
-$('table:contains(Sell Parts):not(:contains(Color:))').hide();
+$('table:contains(Step 1):not(:contains(Category:))').hide();
+$('table:contains(Sell Item):not(:contains(Category:))').hide();
 $('table:contains(Category:):not(:contains(Number:))').hide();
 $('td:contains(View Image):not(:contains(Number:))').hide();
 
