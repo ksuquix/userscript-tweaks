@@ -9,8 +9,12 @@ function quixblsetpercentages() {
 } 
 
 function quixblpriceguideavgset() {
-    avgn = $('table.ta tbody tr:eq(2) td:eq(4)').text().replace(/US \$/,'');
-    avgu = $('table.ta tbody tr:eq(3) td:eq(4)').text().replace(/US \$/,'');
+    avgn = '';
+    avgu = '';
+    if($('table.ta tbody tr:eq(2) td:eq(0)').text()=='New:&nbsp;') {
+	avgn = $('table.ta tbody tr:eq(2) td:eq(4)').text().replace(/US \$/,'');
+	avgu = $('table.ta tbody tr:eq(3) td:eq(4)').text().replace(/US \$/,'');
+    }
     if($('input:radio[name=invNew]:checked').val()=='N') {
 	$('input[name=p_price]').val(avgn);
     }
