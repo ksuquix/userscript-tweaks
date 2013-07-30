@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Bricklink Tweaks
 // @namespace      https://github.com/ksuquix/userscript-tweaks
-// @version        0.0.15
+// @version        0.0.16
 // @description    Add tweaks / features to bricklink
 // @include        http://www.bricklink.com/*
 // @require        http://code.jquery.com/jquery-1.10.2.min.js
@@ -10,6 +10,8 @@
 
 // Chrome extensions are sandboxed.   This lets me use jQuery from Console
 $('title').after('<script type="text/javascript" language="javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>');
+// add functions we want both inside and outside the sandbox
+$('title').after('<script type="text/javascript" language="javascript" src="https://raw.github.com/ksuquix/userscript-tweaks/master/bricklink-subinclude.js"></script>');
 
 // On Part catalog entry, add an "(Add)" link next to price guide that goes into inventory add dialog with
 //    part and color set
@@ -48,9 +50,6 @@ if(window.location.pathname.indexOf('inventory_add.asp')>0) {
 	unsafeWindow.quixblpriceguideavgset();
 });
 }
-
-// add change percentage for whole screen
-$('title').after('<script type="text/javascript" language="javascript" src="https://raw.github.com/ksuquix/userscript-tweaks/master/bricklink-subinclude.js"></script>');
 
 if(window.location.pathname.indexOf('inventory_detail.asp')>0) {
     // trigger percentage change
