@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Bricklink Tweaks
 // @namespace      https://github.com/ksuquix/userscript-tweaks
-// @version        0.0.24
+// @version        0.0.25
 // @description    Add tweaks / features to bricklink
 // @include        http://www.bricklink.com/*
 // @require        http://code.jquery.com/jquery-1.10.2.min.js
@@ -28,6 +28,18 @@ if(window.location.pathname.indexOf('catalogItem.asp')>0 || window.location.path
 	    replace(/catalogItemInv.asp\?S=/,'inventory_add.asp?a=s&itemID=').
 	    replace(/colorID=/,'p_color=');
 	$(this).after('&nbsp;-&nbsp;<a href="'+url+'">Add</a>');
+    });	
+    $('a[href*=catalogItem\\.asp\\?P]').each(function() {
+	url = $(this).attr('href').
+	    replace(/catalogItem.asp\?P=/,'inventory_add.asp?a=p&itemID=').
+	    replace(/colorID=/,'p_color=');
+	$(this).after('&nbsp;<a href="'+url+'">(Add)</a>');
+    });	
+    $('a[href*=catalogItem\\.asp\\?M]').each(function() {
+	url = $(this).attr('href').
+	    replace(/catalogItem.asp\?M=/,'inventory_add.asp?a=m&itemID=').
+	    replace(/colorID=/,'p_color=');
+	$(this).after('&nbsp;<a href="'+url+'">(Add)</a>');
     });	
 }
 
