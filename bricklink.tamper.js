@@ -33,6 +33,7 @@ if(window.location.pathname.indexOf('inventory_add.asp')>0) {
     $('input:radio[name=invNew]').focus(); // focus down the screen first, so we can focus up and get interesting stuff in the screen
     if($('select#p_color').val()>0) {   // only query ajax if color set
 	ajaxGet('priceGuideSummary.asp?a=p&vcID=1&vatInc=N&ajView=Y&colorID='+document.getElementById('p_color').value+'&itemID='+window.document.cascade.elements['p_selecteditemID'].value,getPg,'Y',errPg);
+	quixblpriceguideavgset();
 	$('input[name=p_quantity]').focus();
     } else {
 //	window.setTimeout(function() {
@@ -42,7 +43,10 @@ if(window.location.pathname.indexOf('inventory_add.asp')>0) {
 //	}, 300);
     }
     // reload ajax when color changes
-    $('select#p_color').change(function() {ajaxGet('priceGuideSummary.asp?a=p&vcID=1&vatInc=N&ajView=Y&colorID='+document.getElementById('p_color').value+'&itemID='+window.document.cascade.elements['p_selecteditemID'].value,getPg,'Y',errPg);});
+    $('select#p_color').change(function() {
+	ajaxGet('priceGuideSummary.asp?a=p&vcID=1&vatInc=N&ajView=Y&colorID='+document.getElementById('p_color').value+'&itemID='+window.document.cascade.elements['p_selecteditemID'].value,getPg,'Y',errPg);
+	quixblpriceguideavgset();
+});
 }
 
 // add change percentage for whole screen
