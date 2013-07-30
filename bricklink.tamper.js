@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Bricklink Tweaks
 // @namespace      https://github.com/ksuquix/userscript-tweaks
-// @version        0.0.29
+// @version        0.0.30
 // @description    Add tweaks / features to bricklink
 // @include        http://www.bricklink.com/*
 // @require        http://code.jquery.com/jquery-1.10.2.min.js
@@ -122,3 +122,6 @@ if(window.location.pathname.indexOf('inventory_detail.asp')>0) {
     });
 }
 
+if(window.location.pathname.indexOf('inventory_verify.asp')>0) {
+    $('input[value="Add to Inventory"]').focus();
+}
