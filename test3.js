@@ -1,5 +1,0 @@
-Test
-
-<COMMITHASH>
-
-TEST
