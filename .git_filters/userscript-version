@@ -1,0 +1,16 @@
+#!/usr/bin/perl
+
+use Cwd 'abs_path';
+use File::Basename;
+
+$dir=dirname(abs_path($0));
+
+$ver=`$dir/git-revision.sh -c -p`;
+
+chomp $ver;
+
+while(<>) {
+  $_ =~ s/^(\/\/\s+\@version\s+).*$/\1${ver}/m; 
+  print; 
+}
+
