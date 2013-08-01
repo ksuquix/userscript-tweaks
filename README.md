@@ -18,10 +18,4 @@ In Tampermonkey, here are some things you can do:
 <a href="https://raw.github.com/ksuquix/userscript-tweaks/master/bricklink.tamper.js">Install</a>
 
 * Setting up a clone to do dev:
- + git config filter.js.clean .git_filters/userscript-version
- + git config diff.js.clean .git_filters/userscript-version
-* checking in
- + git commit ; git push ; git checkout HEAD .
-* checking out
- + git pull ; git checkout HEAD
-
+ + ./setup.sh
