@@ -18,4 +18,6 @@ In Tampermonkey, here are some things you can do:
 <a href="https://raw.github.com/ksuquix/userscript-tweaks/master/bricklink.tamper.js">Install Bricklink Seller Tools</a>
 
 * Setting up a clone to do dev:
+ + git clone https://github.com/ksuquix/userscript-tweaks.git
+ + cd userscript-tweaks
  + ./setup.sh
