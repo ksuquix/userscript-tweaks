@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Bricklink Tweaks
 // @namespace      https://github.com/ksuquix/userscript-tweaks
-// @version        0.1.23
+// @version        0.1.24
 // @description    Add tweaks / features to bricklink
 // @include        http://www.bricklink.com/*
 // @require        http://code.jquery.com/jquery-1.10.2.min.js
@@ -122,7 +122,7 @@ if(window.location.pathname.indexOf('inventory_detail.asp')>0) {
     });
 }
 
-if(window.location.pathname.indexOf('inSetEdit.asp')>0) {
+if(window.location.pathname.indexOf('invSetEdit.asp')>0) {
     // trigger percentage change
     $('input[value="Verify Items"]').after('<input type="text" name="quixblpercentages" id="quixblpercentages" value="" size="4" onchange="quixblsetpercentagespartout();">');
 }
