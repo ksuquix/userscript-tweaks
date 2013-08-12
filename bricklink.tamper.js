@@ -122,6 +122,11 @@ if(window.location.pathname.indexOf('inventory_detail.asp')>0) {
     });
 }
 
+if(window.location.pathname.indexOf('inSetEdit.asp')>0) {
+    // trigger percentage change
+    $('input[value="Submit Changes"]').after('<input type="text" name="quixblpercentages" id="quixblpercentages" value="" size="4" onchange="quixblsetpercentagespartout();">');
+}
+
 if(window.location.pathname.indexOf('inventory_verify.asp')>0) {
     $('input[value="Add to Inventory"]').focus();
 }
