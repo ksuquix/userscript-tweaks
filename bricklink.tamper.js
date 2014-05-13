@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Bricklink Tweaks
 // @namespace      https://github.com/ksuquix/userscript-tweaks
-// @version        0.1.26
+// @version        0.1.27
 // @description    Add tweaks / features to bricklink
 // @include        http://www.bricklink.com/*
 // @require        http://code.jquery.com/jquery-1.10.2.min.js
@@ -112,7 +112,7 @@ $('input[value="Reset Form"]').after(
 	setTimeout(function() {
 	    $('select#p_color').focus();
 	    $('select#p_color').select();
-	}, 800);
+	}, 200);
     } else {
 	$('input[name=p_quantity]').focus();
     }
