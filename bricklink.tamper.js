@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Bricklink Tweaks
 // @namespace      https://github.com/ksuquix/userscript-tweaks
-// @version        0.1.25
+// @version        0.1.26
 // @description    Add tweaks / features to bricklink
 // @include        http://www.bricklink.com/*
 // @require        http://code.jquery.com/jquery-1.10.2.min.js
@@ -10,8 +10,15 @@
 
 // Chrome extensions are sandboxed.   This lets me use jQuery from Console
 // $('title').after('<script type="text/javascript" language="javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>');
+// (bricklink seems to include jquery now)
 // add functions we want both inside and outside the sandbox
-$('title').after('<script type="text/javascript" language="javascript" src="https://raw.github.com/ksuquix/userscript-tweaks/master/bricklink-subinclude.js"></script>');
+//$('title').after('<script type="text/javascript" language="javascript" src="https://raw.github.com/ksuquix/userscript-tweaks/master/bricklink-subinclude.js"></script>');
+var oHead = document.getElementsByTagName('HEAD').item(0);
+var oScript= document.createElement("script");
+oScript.type = "text/javascript";
+oScript.src="https://raw.github.com/ksuquix/userscript-tweaks/master/bricklink-subinclude.js";
+oHead.appendChild( oScript);
+
 
 // On Part catalog entry, add an "(Add)" link next to price guide that goes into inventory add dialog with
 //    part and color set
@@ -48,20 +55,23 @@ if(window.location.pathname.indexOf('catalogItem.asp')>0 || window.location.path
 // also sets percentage to 10
 // then focus to quantity
 if(window.location.pathname.indexOf('inventory_add.asp')>0) { 
-    // function to set values
-    $('input:radio[name=invNew]').click(function() { quixblpriceguideavgset(); });
-    if($('select#p_color').val()>0 || $('#p_color').attr('type')=='Hidden') {   // only query ajax if color set or if color hidden instead of selector (sets, minifigs)
-	ajaxGet('priceGuideSummary.asp?a='+$('*[name=itemType]').val()+'&vcID=1&vatInc=N&ajView=Y&colorID='+document.getElementById('p_color').value+'&itemID='+window.document.cascade.elements['p_selecteditemID'].value,getPg,'Y',errPg);
-	setTimeout('quixblpriceguideavgset()',1200);
-    } 
-    // reload ajax when color changes
-    $('select#p_color').change(function() {
-	ajaxGet('priceGuideSummary.asp?a='+$('*[name=itemType]').val()+'&vcID=1&vatInc=N&ajView=Y&colorID='+document.getElementById('p_color').value+'&itemID='+window.document.cascade.elements['p_selecteditemID'].value,getPg,'Y',errPg);
-	setTimeout('quixblpriceguideavgset()',1200);
-    });
+
 
     // hide crap
 $(document).ready(function() {
+
+    // function to set values
+    $('input:radio[name=invNew]').click(function() { quixblpriceguideavgset(); });
+    if($('select#p_color').val()>0 || $('#p_color').attr('type')=='Hidden') {   // only query ajax if color set or if color hidden instead of selector (sets, minifigs)
+	ajaxGet('priceGuideSummary.asp?a='+$('*[name=itemType]').val()+'&vcID=1&vatInc=N&ajView=Y&colorID='+document.getElementById('p_color').value+'&itemID='+window.document.cascade.elements['p_selecteditemID'].value,function(arf) {setTimeout('quixblpriceguideavgset()',100); getPg(arf);},'Y',errPg);
+//	setTimeout('quixblpriceguideavgset()',1200);
+    } 
+    // reload ajax when color changes
+    $('select#p_color').change(function() {
+	ajaxGet('priceGuideSummary.asp?a='+$('*[name=itemType]').val()+'&vcID=1&vatInc=N&ajView=Y&colorID='+document.getElementById('p_color').value+'&itemID='+window.document.cascade.elements['p_selecteditemID'].value,function(arf) {setTimeout('quixblpriceguideavgset()',100); getPg(arf);},'Y',errPg);
+//	setTimeout('quixblpriceguideavgset()',1200);
+    });
+
 $('p:contains(If you select a Part)').hide();
 $('p:contains(The remarks field is only vis)').hide();
 $('p:contains(You can switch back to the radio button)').hide();
