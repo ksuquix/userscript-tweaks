@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Bricklink Tweaks
 // @namespace      https://github.com/ksuquix/userscript-tweaks
-// @version        0.1.27
+// @version        0.1.28
 // @description    Add tweaks / features to bricklink
 // @include        http://www.bricklink.com/*
 // @require        http://code.jquery.com/jquery-1.10.2.min.js
@@ -15,12 +15,9 @@
 //$('title').after('<script type="text/javascript" language="javascript" src="https://raw.github.com/ksuquix/userscript-tweaks/master/bricklink-subinclude.js"></script>');
 var oHead = document.getElementsByTagName('HEAD').item(0);
 var oScript= document.createElement("script");
-
-oScript.innerHTML('<script type="text/javascript">'+"https://raw.github.com/ksuquix/userscript-tweaks/master/bricklink-subinclude.js"+'</script>')
-
-// oScript.type = "text/javascript";
-// oScript.src="https://raw.github.com/ksuquix/userscript-tweaks/master/bricklink-subinclude.js";
-// oHead.appendChild( oScript);
+oScript.type = "text/javascript";
+oScript.src="https://rawgit.com/ksuquix/userscript-tweaks/master/bricklink-subinclude.js";
+oHead.appendChild( oScript);
 
 
 // On Part catalog entry, add an "(Add)" link next to price guide that goes into inventory add dialog with
