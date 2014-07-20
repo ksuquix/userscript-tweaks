@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Bricklink Tweaks
 // @namespace      https://github.com/ksuquix/userscript-tweaks
-// @version        0.1.32
+// @version        0.1.33
 // @description    Add tweaks / features to bricklink
 // @include        http://www.bricklink.com/*
 // @require        http://code.jquery.com/jquery-1.10.2.min.js
@@ -133,7 +133,7 @@ if(window.location.pathname.indexOf('inventory_detail.asp')>0) {
     $('a[href*="catalogItem.asp\?P="]').each(function(){
 	part = $(this).attr('href').match(/P=(\d+)/);
 	if(part) {
-	    $(this).after('&nbsp;<a href="/inventory_add.asp?a=p&itemID='+part[1]+'">(Add)</a>');
+	    $(this).after('&nbsp;<a href="/inventory_add.asp?a=p&itemID='+part[1]+'">(Add)</a><!-- 5 '+$this.attr('href')+'-->');
 	}
     });
 }
