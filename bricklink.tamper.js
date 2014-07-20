@@ -44,7 +44,7 @@ if(window.location.pathname.indexOf('catalogItem.asp')>0 || window.location.path
 	    replace(/.*P=/,'http://www.basebrick.com/parts.php?partnumber=').
 	    replace(/colorID=\d*/,'');
 	burlu = $(this).attr('href').
-	    replace(/.*P=/,'http://www.basebrick.com/listdata2.php?userid=1228partnumber=').
+	    replace(/.*P=/,'http://www.basebrick.com/listdata2.php?userid=1228&partnumber=').
 	    replace(/colorID=\d*/,'');
 	$(this).after('&nbsp;<a href="'+url+'">(Add)</a>&nbsp;<a href="'+burl+'">(BB)</a>&nbsp;<a href="'+burlu+'">(BBu)</a><!-- 3 '+$(this).attr('href')+' // '+burl+'-->');
     });	
