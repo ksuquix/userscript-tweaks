@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Bricklink Tweaks
 // @namespace      https://github.com/ksuquix/userscript-tweaks
-// @version        0.1.31
+// @version        0.1.32
 // @description    Add tweaks / features to bricklink
 // @include        http://www.bricklink.com/*
 // @require        http://code.jquery.com/jquery-1.10.2.min.js
@@ -28,13 +28,13 @@ if(window.location.pathname.indexOf('catalogItem.asp')>0 || window.location.path
 	    replace(/catalogPG.asp\?P=/,'inventory_add.asp?a=p&itemID=').
 	    replace(/catalogPG.asp\?M=/,'inventory_add.asp?a=m&itemID=').
 	    replace(/colorID=/,'p_color=');
-	$(this).after('&nbsp;<a href="'+url+'">(Add)</a>');
+	$(this).after('&nbsp;<a href="'+url+'">(Add)</a><!-- 1 -->');
     });
     $('a[href*=catalogItemInv\\.asp\\?S]').each(function() {
 	url = $(this).attr('href').
 	    replace(/catalogItemInv.asp\?S=/,'inventory_add.asp?a=s&itemID=').
 	    replace(/colorID=/,'p_color=');
-	$(this).after('&nbsp;-&nbsp;<a href="'+url+'">Add</a>');
+	$(this).after('&nbsp;-&nbsp;<a href="'+url+'">Add</a><!-- 2 -->');
     });	
     $('a[href*=catalogItem\\.asp\\?P]').each(function() {
 	url = $(this).attr('href').
@@ -43,7 +43,7 @@ if(window.location.pathname.indexOf('catalogItem.asp')>0 || window.location.path
 	burl = $(this).attr('href').
 	    replace(/www.bricklink.com\/catalogItem.asp\?P=/,'www.basebrick.com/listdata2.php?userid=1228&partnumber=').
 	    replace(/colorID=\d*/,'');
-	$(this).after('&nbsp;<a href="'+url+'">(Add)</a>&nbsp;<a href="'+burl+'>(BB)</a>');
+	$(this).after('&nbsp;<a href="'+url+'">(Add)</a>&nbsp;<a href="'+burl+'>(BB)</a><!-- 3 -->');
     });	
     $('a[href*=catalogItem\\.asp\\?M]').each(function() {
 	url = $(this).attr('href').
@@ -52,7 +52,7 @@ if(window.location.pathname.indexOf('catalogItem.asp')>0 || window.location.path
 	burl = $(this).attr('href').
 	    replace(/www.bricklink.com\/catalogItem.asp\?M=/,'www.basebrick.com/listdata2.php?userid=1228&partnumber=').
 	    replace(/colorID=\d*/,'');
-	$(this).after('&nbsp;<a href="'+url+'">(Add)</a>&nbsp;<a href="'+burl+'>(BB)</a>');
+	$(this).after('&nbsp;<a href="'+url+'">(Add)</a>&nbsp;<a href="'+burl+'>(BB)</a><!-- 4 -->');
     });	
 }
 
