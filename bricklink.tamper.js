@@ -60,7 +60,7 @@ if(window.location.pathname.indexOf('catalogItem.asp')>0 || window.location.path
 	    replace(/\..*/,'').
 	    repalce(/^/,'inventory_add.asp?a=p&itemID=').
 	    replace(/\//,'&colorID=');
-	$(this).parent().after('&nbsp;<a href="'+url+'">(AddC)</a><!-- 6 -->');
+	$(this).parent().parent().after('&nbsp;<a href="'+url+'">(AddC)</a><!-- 6 -->');
     });
 }
 
