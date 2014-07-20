@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Bricklink Tweaks
 // @namespace      https://github.com/ksuquix/userscript-tweaks
-// @version        0.1.310
+// @version        0.1.41
 // @description    Add tweaks / features to bricklink
 // @include        http://www.bricklink.com/*
 // @require        http://code.jquery.com/jquery-1.10.2.min.js
@@ -61,6 +61,7 @@ if(window.location.pathname.indexOf('catalogItem.asp')>0 || window.location.path
 	    repalce(/^/,'inventory_add.asp?a=p&itemID=').
 	    replace(/\//,'&colorID=');
 	$(this).after('&nbsp;<a href="'+url+'">(AddC)</a><!-- 6 -->');
+    }
 }
 
 // If inventory page, automatically trigger the price guide ajax pull
