@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Bricklink Tweaks
 // @namespace      https://github.com/ksuquix/userscript-tweaks
-// @version        0.1.28
+// @version        0.1.29
 // @description    Add tweaks / features to bricklink
 // @include        http://www.bricklink.com/*
 // @require        http://code.jquery.com/jquery-1.10.2.min.js
@@ -46,7 +46,10 @@ if(window.location.pathname.indexOf('catalogItem.asp')>0 || window.location.path
 	url = $(this).attr('href').
 	    replace(/catalogItem.asp\?M=/,'inventory_add.asp?a=m&itemID=').
 	    replace(/colorID=/,'p_color=');
-	$(this).after('&nbsp;<a href="'+url+'">(Add)</a>');
+	burl = $(this).attr('href').
+	    replace(/www.bricklink.com\/catalogItem.asp\?M=/,'www.basebrick.com/listdata2.php?userid=1228&partnumber=').
+	    replace(/colorID=\d*/,'');
+	$(this).after('&nbsp;<a href="'+url+'">(Add)</a>&nbsp;<a href="'+burl+'>(BB)</a>');
     });	
 }
 
