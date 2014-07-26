@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Bricklink Tweaks
 // @namespace      https://github.com/ksuquix/userscript-tweaks
-// @version        0.1.62
+// @version        0.1.63
 // @description    Add tweaks / features to bricklink
 // @include        http://www.bricklink.com/*
 // @require        http://code.jquery.com/jquery-1.10.2.min.js
@@ -137,7 +137,7 @@ $('input[value="Reset Form"]').after(
 
 }
 
-if(window.location.pathname.indexOf('orderdetails.asp')>0 ) { 
+if(window.location.pathname.indexOf('orderDetails.asp')>0 ) { 
 
     $('a[href*=catalogItemPic\\.asp\\?S]').each(function() {
 	burl = $(this).attr('href').
