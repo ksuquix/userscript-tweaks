@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Bricklink Tweaks
 // @namespace      https://github.com/ksuquix/userscript-tweaks
-// @version        0.1.61
+// @version        0.1.62
 // @description    Add tweaks / features to bricklink
 // @include        http://www.bricklink.com/*
 // @require        http://code.jquery.com/jquery-1.10.2.min.js
@@ -134,6 +134,31 @@ $('input[value="Reset Form"]').after(
 	$('input[name=p_quantity]').focus();
     }
 });
+
+}
+
+if(window.location.pathname.indexOf('orderdetails.asp')>0 ) { 
+
+    $('a[href*=catalogItemPic\\.asp\\?S]').each(function() {
+	burl = $(this).attr('href').
+	    replace(/.*S=/,'http://www.basebrick.com/sets.php?s=');
+	$(this).after('&nbsp;-&nbsp;<a href="'+burl+'">BB</a><!-- 2 -->');
+    });	
+    $('a[href*=catalogItemPic\\.asp\\?P]').each(function() {
+	burl = $(this).attr('href').
+	    replace(/.*P=/,'http://www.basebrick.com/parts.php?partnumber=').
+	    replace(/colorID=\d*/,'');
+	burlu = $(this).attr('href').
+	    replace(/.*P=/,'http://www.basebrick.com/listdata2.php?userid=1228&partnumber=').
+	    replace(/colorID=\d*/,'');
+	$(this).after('&nbsp;<a href="'+burl+'">(BB)</a>&nbsp;<a href="'+burlu+'">(BBu)</a><!-- 3 '+$(this).attr('href')+' // '+burl+'-->');
+    });	
+    $('a[href*=catalogItemPic\\.asp\\?M]').each(function() {
+	burl = $(this).attr('href').
+	    replace(/.*M=/,'http://www.basebrick.com/minifigs.php?minifig=').
+	    replace(/colorID=\d*/,'');
+	$(this).after('&nbsp;<a href="'+burl+'">(BB)</a><!-- 4 -->');
+    });	
 
 }
 
