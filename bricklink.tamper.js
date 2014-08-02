@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Bricklink Tweaks
 // @namespace      https://github.com/ksuquix/userscript-tweaks
-// @version        0.1.64
+// @version        0.1.65
 // @description    Add tweaks / features to bricklink
 // @include        http://www.bricklink.com/*
 // @require        http://code.jquery.com/jquery-1.10.2.min.js
@@ -19,6 +19,23 @@ oScript.type = "text/javascript";
 oScript.src="https://rawgit.com/ksuquix/userscript-tweaks/master/bricklink-subinclude.js";
 oHead.appendChild( oScript);
 
+
+$.extend({
+  getUrlVars: function(){
+    var vars = [], hash;
+    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    for(var i = 0; i < hashes.length; i++)
+    {
+      hash = hashes[i].split('=');
+      vars.push(hash[0]);
+      vars[hash[0]] = hash[1];
+    }
+    return vars;
+  },
+  getUrlVar: function(name){
+    return $.getUrlVars()[name];
+  }
+});
 
 // On Part catalog entry, add an "(Add)" link next to price guide that goes into inventory add dialog with
 //    part and color set
@@ -47,6 +64,11 @@ if(window.location.pathname.indexOf('catalogItem.asp')>0 || window.location.path
 	    replace(/.*P=/,'http://www.basebrick.com/listdata2.php?userid=1228&partnumber=').
 	    replace(/colorID=\d*/,'');
 	$(this).after('&nbsp;<a href="'+url+'">(Add)</a>&nbsp;<a href="'+burl+'">(BB)</a>&nbsp;<a href="'+burlu+'">(BBu)</a><!-- 3 '+$(this).attr('href')+' // '+burl+'-->');
+	if($.getUrlVar('colorPart')) {
+	    burluc = $(this).attr('href').
+		replace(/.*P=/,'http://www.basebrick.com/listdata2.php?userid=1228&partnumber=').
+		replace(/colorID=\d*/,'')+'&p_color='+$.getUrlVar('colorPart');
+	    $(this).after('&nbsp;<a href="'+burluc+'">(AddC)</a>');
     });	
     $('a[href*=catalogItem\\.asp\\?M]').each(function() {
 	url = $(this).attr('href').
