@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Bricklink Tweaks
 // @namespace      https://github.com/ksuquix/userscript-tweaks
-// @version        0.1.69
+// @version        0.1.70
 // @description    Add tweaks / features to bricklink
 // @include        http://www.bricklink.com/*
 // @require        http://code.jquery.com/jquery-1.10.2.min.js
@@ -74,6 +74,15 @@ if(window.location.pathname.indexOf('catalogItem.asp')>0 || window.location.path
     $('a[href*=catalogItem\\.asp\\?M]').each(function() {
 	url = $(this).attr('href').
 	    replace(/catalogItem.asp\?M=/,'inventory_add.asp?a=m&itemID=').
+	    replace(/colorID=/,'p_color=');
+	burl = $(this).attr('href').
+	    replace(/.*M=/,'http://www.basebrick.com/minifigs.php?minifig=').
+	    replace(/colorID=\d*/,'');
+	$(this).after('&nbsp;<a href="'+url+'">(Add)</a>&nbsp;<a href="'+burl+'">(BB)</a><!-- 4 -->');
+    });	
+    $('a[href*=catalogitem\\.page\\?M]').each(function() {
+	url = $(this).attr('href').
+	    replace(/catalogitem.page\?M=/,'inventory_add.asp?a=m&itemID=').
 	    replace(/colorID=/,'p_color=');
 	burl = $(this).attr('href').
 	    replace(/.*M=/,'http://www.basebrick.com/minifigs.php?minifig=').
